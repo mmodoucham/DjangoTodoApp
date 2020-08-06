@@ -1,0 +1,71 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My TODO APP</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+          integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+</head>
+<body>
+<div class="container">
+    <ul class="list-group">
+
+        <div class="jumbotron">
+            <h1 class="display-4">Hello, world!</h1>
+            <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+            <hr class="my-4">
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="{% url 'create' %}" role="button">Create TODO</a>
+            </p>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Title</th>
+                    <th scope="col">Date</th>
+                    <th scope="col">Status</th>
+                    <th scope="col">Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for todo in todos %}
+                    <tr>
+                        <th scope="row"></th>
+                        <td>{{ todo.title }}</td>
+                        <td>{{ todo.date_added }}</td>
+                        {% if todo.status == 1 %}
+                            <td>
+                                <button type="button" class="btn btn-success">Done</button>
+                            </td>
+                        {% else %}
+                            <td>
+                                <button type="button" class="btn btn-danger">Pending</button>
+                            </td>
+                        {% endif %}
+                        <td>
+                            <a href="#" class="btn btn-primary"><i class="fa fa-pencil-square-o" aria-hidden="true"
+                                                                   data-toggle="tooltip"
+                                                                   data-placement="top" title="Edit"></i> </a> |
+                            <a href="{% url 'delete' todo.id %}" class="btn btn-danger"><i class="fa fa-trash" aria-hidden="true"
+                                                                  data-toggle="tooltip" data-placement="top"
+                                                                  title="Delete"></i> </a> |
+                            <a href="#" class="btn btn-success"><i class="fa fa-check" aria-hidden="true"
+                                                                   data-toggle="tooltip" data-placement="top"
+                                                                   title="Done"></i> </a>
+
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+
+    </ul>
+</div>
+
+</body>
+</html>
